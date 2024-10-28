@@ -80,7 +80,7 @@
     //#set par(leading: 1em)
     #set text(
       //font: "Comfortaa",
-      font: "Roboto",
+      font: ("Frontpage Pro", "Roboto"),
       //stretch: 50%,
       //fallback: false,
       weight: "bold",

@@ -53,3 +53,8 @@
   "10d": "732054",
   "11d": "4C226A",
 )
+
+#let tuda_c = (:)
+#for (key, value) in tuda_colors {
+  tuda_c.insert(key, rgb(value))
+}
