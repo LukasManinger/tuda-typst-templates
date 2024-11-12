@@ -41,6 +41,7 @@
   // optional sub-logo of an institute.
   // E.g. image("logos/iasLogo.jpeg")
   logo_institute: none,
+  logo_institute_secondary: none,
 
   // How to set the size of the optional sub-logo.
   // either "width": use tud_logo_width*(2/3)
@@ -130,14 +131,18 @@
       // color rect with logos
       rect(
         fill: color.rgb(accentcolor_rgb),
+        //fill: gradient.linear(rgb(accentcolor_rgb).rotate(-25deg), rgb(accentcolor_rgb), rgb(accentcolor_rgb), rgb(accentcolor_rgb).rotate(35deg), angle: 45deg), //.sharp(15),
         stroke: (
           top: tud_heading_line_thin_stroke,
-          bottom: tud_heading_line_thin_stroke
+          bottom: tud_heading_line_thin_stroke,
+          // left: 1pt + white,  // to reduce thin outline of box TODO rethink
+          // right: 1pt + white,
         ),
         inset: 0mm,
         width: 100%,
         height: 100%//10em
       )[
+        #place(image("../../../../../res/tuda_logo_RGB_c.svg", width: 100%))
         
         #v(logo_tud_height/2)
         #context{
@@ -152,18 +157,18 @@
 
           align(right)[
             //#natural-image(logo_tuda_path)
-            #grid( 
+            #grid(
               // tud logo
               // move logo(s) to the right
-              box(inset: (right: tud_logo_offset_right), fill: black)[
+              box(inset: (right: tud_logo_offset_right), fill: white)[
                 #set image(height: logo_tud_height)
                 #tud_logo
               ],
               // sub logo
-              v(5mm),
               // height from design guidelines
               if logo_institute != none {
-                box(inset: (right: logo_institute_offset_right), fill: black)[
+                v(5mm)
+                box(inset: (right: logo_institute_offset_right), fill: white)[
                   #set image(height: tud_logo_width*(2/3))
                   #{
                     if logo_institute_sizeing_type == "width" {
@@ -182,8 +187,33 @@
                   }
                 ]
               },
+              // sub sub logo
+              // height from design guidelines
+              if logo_institute_secondary != none {
+                v(5mm)
+                box(inset: (right: logo_institute_offset_right), fill: white)[
+                  #set image(height: tud_logo_width*(2/3))
+                  #{
+                    if logo_institute_sizeing_type == "width" {
+                      //image(logo_institute_path, width: tud_logo_width*(2/3))
+                      set image(width: tud_logo_width*(2/3), height: auto)
+                      logo_institute_secondary
+                    }
+                    else if logo_institute_sizeing_type == "height" {
+                      //image(logo_institute_path, height: logo_tud_height*(2/3))
+                      set image(height: logo_tud_height*(2/3))
+                      logo_institute_secondary
+                    }
+                    else {
+                      panic("logo_institute_sizeing_type has to be width or height")
+                    }
+                  }
+                ]
+              },
+              
               // sub box with custom text
               if logo_sub_content_text != none {
+                v(5mm)
                 box(width: tud_logo_width, 
                     outset: 0mm, 
                     fill: white, 
