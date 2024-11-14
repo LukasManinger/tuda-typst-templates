@@ -1,5 +1,5 @@
 
-
+// comment
 
 // tuda colors as key-value array
 // from https://github.com/tudace/tuda_latex_templates/blob/main/tex/tudacolors.def
