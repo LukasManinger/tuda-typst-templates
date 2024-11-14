@@ -131,7 +131,6 @@
       // color rect with logos
       rect(
         fill: color.rgb(accentcolor_rgb),
-        //fill: gradient.linear(rgb(accentcolor_rgb).rotate(-25deg), rgb(accentcolor_rgb), rgb(accentcolor_rgb), rgb(accentcolor_rgb).rotate(35deg), angle: 45deg), //.sharp(15),
         stroke: (
           top: tud_heading_line_thin_stroke,
           bottom: tud_heading_line_thin_stroke,
