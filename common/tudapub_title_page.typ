@@ -217,20 +217,22 @@
               // sub box with custom text
               if logo_sub_content_text != none {
                 v(5mm)
-                box(width: tud_logo_width, 
-                    outset: 0mm, 
-                    fill: white, 
-                    inset: (
-                      top: 6pt,
-                      bottom: 6pt,
-                      left: 4.5mm,
-                      right: 6pt
-                    ),
-                    align(left)[
+                box(
+                  width: tud_logo_width, 
+                  outset: 0mm, 
+                  fill: white, 
+                  inset: (
+                    top: 6pt,
+                    bottom: 6pt,
+                    left: 4.5mm,
+                    right: 6pt
+                  ),
+                  align(left)[
                     #set text(weight: "regular", size: 9.96pt)
-                  #logo_sub_content_text
-                ])
-            }
+                    #logo_sub_content_text
+                  ]
+                )
+              }
             )
           ]
         }
