@@ -142,7 +142,7 @@
         width: 100%,
         height: 100%//10em
       )[
-        #place(image("../../../../../res/tuda_logo_RGB_c.svg", width: 100%))
+        #place(image("../../../../../res/tuda_pattern.svg", width: 100%))
         
         #v(logo_tud_height/2)
         #context{
