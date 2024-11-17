@@ -55,7 +55,9 @@
   // E.g. logo_sub_content_text: [ Institute A \ filed of study: \ B]
   logo_sub_content_text: none,
 
-  title_height: 3.5em
+  title_height: 3.5em,
+
+  rect_pattern: none,
 ) = {
 
   // vars
@@ -141,7 +143,10 @@
         width: 100%,
         height: 100%//10em
       )[
-        #place(image("../../../../../res/tuda_pattern.svg", width: 100%))
+        #[
+          #set image(width: 100%)
+          #place(rect_pattern)
+        ]
         
         #v(logo_tud_height/2)
         #context{

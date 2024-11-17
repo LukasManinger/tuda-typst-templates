@@ -1,6 +1,6 @@
 #import "format.typ": *
 
-#let tudapub-get-thesis-statement-pursuant(date: none, author: none, location: none, include-english-translation: false) = [
+#let tudapub-get-thesis-statement-pursuant(date: none, author: none, location: none, include-english-translation: false, signature: none) = [
   #set heading(outlined: false)
 
   #block(breakable: false)[
@@ -41,6 +41,10 @@
       ],
       align(right)[
         #stack(
+          [
+            #set image(width: 4cm, height: 1cm, fit: "contain")
+            #place(center + bottom)[#signature]
+          ],
           line(length: 5cm, stroke: 0.3pt),
           v(2mm),
           align(center)[
@@ -49,6 +53,5 @@
         )
       ]
     )
-
   ]
 ]
