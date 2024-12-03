@@ -34,7 +34,7 @@
       columns: (1fr, auto),
       inset: 0pt,
       stroke: none,
-      align: horizon,
+      align: bottom,
       [
         #location,
         #format-date(date, "ger")
