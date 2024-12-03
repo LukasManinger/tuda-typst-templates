@@ -5,6 +5,7 @@ import toml
 import shutil
 import pathlib
 import re
+import sys
 
 
 
@@ -19,15 +20,21 @@ publish_ignore_files = """
 
 /tests/
 /tud_design_guide/
+**/TODO.md
 
 /templates_examples/*/logos/*
 !/templates_examples/*/logos/*.sh
 /templates_examples/*/fonts/*
 !/templates_examples/*/fonts/*.sh
 /templates_examples/*/template
+/templates_examples/*/*.pdf
 
 /common/
 /assets/
+
+.DS_Store
+.venv
+.vscode
 
 """
 
@@ -56,7 +63,7 @@ parser = argparse.ArgumentParser(
     description='Copies this repo to typst local packages or locally cloned typst-packages while not copying the ignored files.'
 )
 parser.add_argument('--local', action='store_true', 
-                    help='copy to $HOME/.local/share/typst/packages/local/<PACKAGE_NAME>/<VERSION>.99')
+                    help='copy to $TYPST_PACKAGE_ROOT/typst/packages/local/<PACKAGE_NAME>/<VERSION>.99')
 parser.add_argument('--clean-dist-folder-force', action='store_true', 
                     help='Delete the contents of the destinatio folder before copying without asking. ')
 parser.add_argument('--universe', type=str, 
@@ -75,7 +82,15 @@ if not (args.local ^ (args.universe is not None)):
     exit(0)
 
 if args.local:
-    copy_dest_dir = str(pathlib.Path.home()) + "/.local/share/typst/packages/local/"
+    if sys.platform.startswith("linux"):
+        copy_dest_dir = str(pathlib.Path.home()) + "/.local/share/typst/packages/local/"
+    elif sys.platform.startswith("win32"):
+        copy_dest_dir = os.getenv("APPDATA") + "/typst/packages/local/"
+    elif sys.platform.startswith("darwin"):
+        copy_dest_dir = str(pathlib.Path.home()) + "/Library/Application Support/typst/packages/local/"
+    else:
+        print('Error: Unsupported platform')
+        exit(0)
 elif args.universe is not None:
     copy_dest_dir = args.universe + '/packages/preview/'
 
@@ -134,7 +149,7 @@ def copy_template(copy_dest_dir, template_folder_name = 'tudapub'):
     /templates_examples/*/logos/*
     !/templates_examples/*/logos/*.sh
     /templates_examples/*/fonts/*
-    !/template_examples/*/fonts/*.sh
+    !/templates_examples/*/fonts/*.sh
     """)
 
     
@@ -153,13 +168,17 @@ def copy_template(copy_dest_dir, template_folder_name = 'tudapub'):
     shutil.rmtree(examples_folder)
 
 
-    # replace links in readme -> add full repo path in front
+    # replace markdown links in readme -> add full repo path in front
     links_to_replace_with_repo_path = [
+        'templates/tudapub/template/tudapub.typ',
         'example_tudapub.pdf',
         'example_tudapub.typ',
         'templates/tudapub/tudapub.typ',
+        'templates/tudapub/TODO.md',
+        'templates/tudaexercise/template/tudaexercise.typ',
+        'templates_examples/tudaexercise/main.typ'
     ]
-    repo_path = ""
+    repo_path = package_repository + '/blob/main/'
     print('\n>> will replace links in the REAMDME.md')
     link_regex = re.compile(r'\[([^\]]+)\]\(([^)]+)\)')
     with open(copy_dest_dir / "README.md", "r+") as readme:
@@ -171,12 +190,17 @@ def copy_template(copy_dest_dir, template_folder_name = 'tudapub'):
             out_split = out_full.split('(')
             assert len(out_split) == 2, "can't parse link: " + out_full
             for replace_str in links_to_replace_with_repo_path:
-                out_split[-1] = out_split[-1] .replace(replace_str, package_repository + '/blob/main/' + replace_str)
+                out_split[-1] = out_split[-1] .replace(replace_str, repo_path + replace_str)
             out_full = '('.join(out_split)
             print('  - new link: ' + out_full)
             return out_full
 
         c = link_regex.sub(replace, c)
+
+        # replace image links in readme
+        img_tag_start = '<img src="'
+        repo_path_raw = package_repository.replace('https://github.com/', 'https://raw.githubusercontent.com/') + '/refs/heads/main/'
+        c = c.replace(img_tag_start, img_tag_start + repo_path_raw)
 
         # overwrite
         readme.seek(0)

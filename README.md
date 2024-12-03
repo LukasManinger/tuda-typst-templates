@@ -1,5 +1,5 @@
-# Typst Template for the Corporate Design of TU Darmstadt :book:
-This **unofficial** template can be used to write in [Typst](https://github.com/typst/typst) with the corporate design of [TU Darmstadt](https://www.tu-darmstadt.de/).
+# Typst Templates for the Corporate Design of TU Darmstadt :book:
+These **unofficial** templates can be used to write in [Typst](https://github.com/typst/typst) with the corporate design of [TU Darmstadt](https://www.tu-darmstadt.de/).
 
 #### Disclaimer
 Please ask your supervisor if you are allowed to use typst and this template for your thesis or other documents.
@@ -18,13 +18,18 @@ For missing features, ideas or other problems you can just open an issue :wink:.
 | Template | Preview | Example | Scope |
 |----------|---------|---------|-------|
 | [tudapub](templates/tudapub/template/tudapub.typ) | <img src="templates/tudapub/preview/tudapub_prev-01.png" height="300px"> | [example_tudapub.pdf](example_tudapub.pdf) <br/> [example_tudapub.typ](example_tudapub.typ) | Master and Bachelor thesis |
-| [tuda-exercise](templates/tudaexercise/template/tudaexercise.typ) | <img src="templates/tudaexercise/preview/tudaexercise_prev-1.png" height="300px"> | [example_tudaexercise-TODO.pdf](TODO) <br/> [example_tudaexercise-TODO-.typ](TODO.typ) | Exercises |
+| [tudaexercise](templates/tudaexercise/template/tudaexercise.typ) | <img src="templates/tudaexercise/preview/tudaexercise_prev-1.png" height="300px"> | [Example File](templates_examples/tudaexercise/main.typ) | Exercises |
 
 ## Usage
 Create a new typst project based on this template locally.
 ```bash
+# for tudapub
 typst init @preview/athena-tu-darmstadt-thesis
 cd athena-tu-darmstadt-thesis
+
+# for tudaexercise
+typst init @preview/athena-tu-darmstadt-exercise
+cd athena-tu-darmstadt-exercise
 ```
 Or create a project on the typst web app based on this template.
 
@@ -35,7 +40,7 @@ For a manual setup create a folder for your writing project and download this te
 ```bash
 mkdir my_thesis && cd my_thesis
 mkdir templates && cd templates
-git clone https://github.com/JeyRunner/tuda-typst-templates templates/
+git clone https://github.com/JeyRunner/tuda-typst-templates
 ```
 </details>
 
@@ -48,12 +53,16 @@ cd asssets/logos
 ./convert_logo.sh
 ```
 
+Note: The here used `pdf2svg` command might not be available. In this case we recommend a online converter like [PDF24 Tools](https://tools.pdf24.org/en/pdf-to-svg). There also is a [tool](https://github.com/FussballAndy/typst-img-to-local) to install images as local typst packages.
+
 Also download the required fonts `Roboto` and `XCharter`:
 ```bash
 cd asssets/fonts
 ./download_fonts.sh
 ```
-Now you can install all fonts in the folders in `fonts` on your system.
+Optionally you can install all fonts in the folders in `fonts` on your system. But you can also use Typst's `--font-path` option. Or install them in a folder and add the folder to `TYPST_FONT_PATHS` for a single font folder.
+
+Note: wget might not be available. In this case either download it or replace the command with something like `curl <url> -o <filename> -L`
 
 <details>
 <summary>Create a main.typ file for the manual template installation.</summary>
@@ -82,34 +91,12 @@ Some Text
 typst --watch main.typ --font-path asssets/fonts/
 ```
 
-This will watch your file and recompile it to a pdf when the file is saved. For writing, you can use [Vscode](https://code.visualstudio.com/) with these extensions: [Typst LSP](https://marketplace.visualstudio.com/items?itemName=nvarner.typst-lsp) and [Typst Preview](https://marketplace.visualstudio.com/items?itemName=mgt19937.typst-preview). Or use the [typst web app](https://typst.app/) (here you need to upload the logo and the fonts).
+This will watch your file and recompile it to a pdf when the file is saved. For writing, you can use [Vscode](https://code.visualstudio.com/) with these extensions: [Tinymist Typst](https://marketplace.visualstudio.com/items?itemName=myriad-dreamin.tinymist). Or use the [typst web app](https://typst.app/) (here you need to upload the logo and the fonts).
 
 Note that we add `--font-path` to ensure that the correct fonts are used.
 Due to a bug (typst/typst#2917 typst/typst#2098) typst sometimes uses the font `Roboto condensed` instead of `Roboto`.
 To be on the safe side, double-check the embedded fonts in the pdf (there should be no `Roboto condensed`).
 What also works is to uninstall/deactivate all `Roboto condensed` fonts from your system.
 
-
 ## Todos
-* [ ] some bug seems to insert an empty page at the end of the document when content (title page) appears before this second 'set page'
-* [ ] numbering/labeling of sub-equations (that are aligned with the other sub-equations)
-* [x] remove page numbers in footer before ~~and at table of contents~~
-* [x] fix first-level heading page is wrong
-  * in the outline, the page of the first-level heading is sometimes the previous page of the heading. Just appears in combination with `figure_numbering_per_chapter`.
-* [ ] fix referencing figures respect figure numbering when using `figure_numbering_per_chapter`
-* [ ] first-level headings should be referenced as 'Chapter' not as 'Sections'
-* [ ] add pages for:
-  * [x] abstract
-  * [ ] list of figures, tables, ... other
-  * [ ] list of abbreviations (glossary)
-  * [x] references
-* [ ] references list: use same citation style is 'numeric' in latex
-* [ ] reduce vertical spacing between adjacent headings when there is no text in between (looks better, latex template also does this)
-* [x] add arguments for optional pages:
-  * after title page
-  * before outline table of contents
-  * after outline table of contents
-* [ ] fix equation numbering per chapter (somehow increases in steps of 2)
-* [x] provide some default page margins (small, medium, large)
-* [ ] ~~make all font sizes relative to the main text font size (e.g. headings)~~
-* [ ] switch to kebab case for template, function args
+- [todos of thesis template](templates/tudapub/TODO.md)
