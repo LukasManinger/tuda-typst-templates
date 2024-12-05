@@ -15,6 +15,9 @@
     Bei einer Thesis des Fachbereichs Architektur entspricht die eingereichte elektronische Fassung dem vorgestellten Modell und den vorgelegten Plänen.
   ]
 
+  //#v(0.7cm)
+  #line(length: 100%, stroke: 0.6pt)
+
   #block(breakable: false)[
     #if include-english-translation [
       === English translation for information purposes  only: \ Thesis Statement pursuant to § 22 paragraph 7 of APB TU Darmstadt
@@ -27,6 +30,8 @@
 
       For a thesis of the Department of Architecture, the submitted electronic version corresponds to the presented model and the submitted architectural plans.
     ]
+
+    #line(length: 100%, stroke: 0.6pt)
 
     #v(1.4cm)
 
