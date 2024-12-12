@@ -76,6 +76,8 @@
     else {panic("thesis_type has to be either 'master' or 'bachelor'")}
   }
 
+  // Experimental
+  let box_stroke = (y: tud_heading_line_thin_stroke + color.rgb(accentcolor_rgb))
 
   ///////////////////////////////////////
   // Display the title page
@@ -168,15 +170,35 @@
             #grid(
               // tud logo
               // move logo(s) to the right
-              box(inset: (right: tud_logo_offset_right), fill: white)[
+              box(inset: (right: tud_logo_offset_right), fill: white, stroke: box_stroke)[
                 #set image(height: logo_tud_height)
                 #tud_logo
               ],
+              // sub box with custom text
+              if logo_sub_content_text != none {
+                v(5mm)
+                box(
+                  width: tud_logo_width, 
+                  outset: 0mm, 
+                  fill: white,
+                  stroke: box_stroke,
+                  inset: (
+                    top: 6pt,
+                    bottom: 6pt,
+                    left: 4.5mm,
+                    right: 6pt
+                  ),
+                  align(left)[
+                    #set text(weight: "regular", size: 9.96pt)
+                    #logo_sub_content_text
+                  ]
+                )
+              },
               // sub logo
               // height from design guidelines
               if logo_institute != none {
                 v(5mm)
-                box(inset: (right: logo_institute_offset_right), fill: white)[
+                box(inset: (right: logo_institute_offset_right), fill: white, stroke: box_stroke)[
                   #set image(height: tud_logo_width*(2/3))
                   #{
                     if logo_institute_sizeing_type == "width" {
@@ -199,7 +221,7 @@
               // height from design guidelines
               if logo_institute_secondary != none {
                 v(5mm)
-                box(inset: (right: logo_institute_offset_right), fill: white)[
+                box(inset: (right: logo_institute_offset_right), fill: white, stroke: box_stroke)[
                   #set image(height: tud_logo_width*(2/3))
                   #{
                     if logo_institute_sizeing_type == "width" {
@@ -217,26 +239,6 @@
                     }
                   }
                 ]
-              },
-              
-              // sub box with custom text
-              if logo_sub_content_text != none {
-                v(5mm)
-                box(
-                  width: tud_logo_width, 
-                  outset: 0mm, 
-                  fill: white, 
-                  inset: (
-                    top: 6pt,
-                    bottom: 6pt,
-                    left: 4.5mm,
-                    right: 6pt
-                  ),
-                  align(left)[
-                    #set text(weight: "regular", size: 9.96pt)
-                    #logo_sub_content_text
-                  ]
-                )
               }
             )
           ]
