@@ -3,10 +3,13 @@
 #let tudapub-get-thesis-statement-pursuant(date: none, author: none, location: none, include-english-translation: false, signature: none) = [
   #set heading(outlined: false)
 
+  #set text(top-edge: 0.8em, bottom-edge: -0.2em)
+  #set par(justify: false, leading: 0.12em, spacing: 9pt)
+
   #block(breakable: false)[
     *Erklärung zur Abschlussarbeit gemäß § 22 Abs. 7 APB TU Darmstadt*
 
-    Hiermit erkläre ich, #author, dass ich die vorliegende Arbeit gemäß § 22 Abs. 7 APB TU Darmstadt selbstständig, ohne Hilfe Dritter und nur mit den angegebenen Quellen und Hilfsmitteln angefertigt habe. Ich habe mit Ausnahme der zitierten Literatur und anderer in der Arbeit genannter Quellen keine fremden Hilfsmittel benutzt. Die von mir bei der Anfertigung dieser wissenschaftlichen Arbeit wörtlich oder inhaltlich benutzte Literatur und alle anderen Quellen habe ich im Text deutlich gekennzeichnet und gesondert aufgeführt. Dies gilt auch für Quellen oder Hilfsmittel aus dem Internet.
+    Hiermit erkläre ich, #emph(author), dass ich die vorliegende Arbeit gemäß § 22 Abs. 7 APB TU Darmstadt selbstständig, ohne Hilfe Dritter und nur mit den angegebenen Quellen und Hilfsmitteln angefertigt habe. Ich habe mit Ausnahme der zitierten Literatur und anderer in der Arbeit genannter Quellen keine fremden Hilfsmittel benutzt. Die von mir bei der Anfertigung dieser wissenschaftlichen Arbeit wörtlich oder inhaltlich benutzte Literatur und alle anderen Quellen habe ich im Text deutlich gekennzeichnet und gesondert aufgeführt. Dies gilt auch für Quellen oder Hilfsmittel aus dem Internet.
 
     Diese Arbeit hat in gleicher oder ähnlicher Form noch keiner Prüfungsbehörde vorgelegen. 
 
@@ -15,14 +18,17 @@
     Bei einer Thesis des Fachbereichs Architektur entspricht die eingereichte elektronische Fassung dem vorgestellten Modell und den vorgelegten Plänen.
   ]
 
-  //#v(0.7cm)
+  #v(1em)
   #line(length: 100%, stroke: 0.6pt)
+  #v(1em)
 
   #block(breakable: false)[
     #if include-english-translation [
-      *English translation for information purposes  only: \ Thesis Statement pursuant to § 22 paragraph 7 of APB TU Darmstadt*
+      *English translation for information purposes  only:* 
+      
+      *Thesis Statement pursuant to § 22 paragraph 7 of APB TU Darmstadt*
 
-      I herewith formally declare that I, #author, have written the submitted thesis independently pursuant to § 22 paragraph 7 of APB TU Darmstadt without any outside support and using only the quoted literature and other sources. I did not use any outside support except for the quoted literature and other sources mentioned in the paper. I have clearly marked and separately listed in the text the literature used literally or in terms of content and all other sources I used for the preparation of this academic work. This also applies to sources or aids from the Internet.
+      I herewith formally declare that I, #emph(author), have written the submitted thesis independently pursuant to § 22 paragraph 7 of APB TU Darmstadt without any outside support and using only the quoted literature and other sources. I did not use any outside support except for the quoted literature and other sources mentioned in the paper. I have clearly marked and separately listed in the text the literature used literally or in terms of content and all other sources I used for the preparation of this academic work. This also applies to sources or aids from the Internet.
 
       This thesis has not been handed in or published before in the same or similar form.
 
@@ -31,8 +37,10 @@
       For a thesis of the Department of Architecture, the submitted electronic version corresponds to the presented model and the submitted architectural plans.
     ]
 
+    #v(1em)
     #line(length: 100%, stroke: 0.6pt)
-
+    #v(1em)
+    
     #v(1.4cm)
 
     #table(
