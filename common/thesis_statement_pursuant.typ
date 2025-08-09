@@ -50,7 +50,7 @@
       align: bottom,
       [
         #location,
-        #format-date(date, "ger")
+        #format-date(date, "de")
       ],
       align(right)[
         #stack(
