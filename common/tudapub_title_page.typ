@@ -78,6 +78,7 @@
 
   // Experimental
   let box_stroke = (y: tud_heading_line_thin_stroke + color.rgb(accentcolor_rgb))
+  let box_stroke_img = (y: 2 * tud_heading_line_thin_stroke + color.rgb(accentcolor_rgb))
 
   ///////////////////////////////////////
   // Display the title page
@@ -173,7 +174,7 @@
             #grid(
               // tud logo
               // move logo(s) to the right
-              box(inset: (right: tud_logo_offset_right), fill: white, stroke: box_stroke)[
+              box(inset: (right: tud_logo_offset_right), fill: white, stroke: box_stroke_img)[
                 #set image(height: logo_tud_height)
                 #tud_logo
               ],
@@ -201,7 +202,7 @@
               // height from design guidelines
               if logo_institute != none {
                 v(5mm)
-                box(inset: (right: logo_institute_offset_right), fill: white, stroke: box_stroke)[
+                box(inset: (right: logo_institute_offset_right), fill: white, stroke: box_stroke_img)[
                   #set image(height: tud_logo_width*(2/3))
                   #{
                     if logo_institute_sizeing_type == "width" {
@@ -224,7 +225,7 @@
               // height from design guidelines
               if logo_institute_secondary != none {
                 v(5mm)
-                box(inset: (right: logo_institute_offset_right), fill: white, stroke: box_stroke)[
+                box(inset: (right: logo_institute_offset_right), fill: white, stroke: box_stroke_img)[
                   #set image(height: tud_logo_width*(2/3))
                   #{
                     if logo_institute_sizeing_type == "width" {
